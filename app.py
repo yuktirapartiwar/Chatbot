@@ -7,18 +7,16 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/chat', methods=['GET', 'POST'])
+@app.route('/chat', methods=['POST'])
 def chat():
-    bot_response = None
     if request.method == 'POST':
         message = request.form['message']
         temperature = float(request.form['temperature'])
         max_tokens = int(request.form['max_tokens'])
         tone = request.form['tone']
         model = "gpt-3.5-turbo"
-        role = "user"
-        bot_response = chat_message(message, model, role, temperature, max_tokens, tone)
-    return render_template('index.html', bot_response=bot_response)
+        conversation_history = chat_message(message, model, temperature, max_tokens, tone)
+    return render_template('index.html', conversation_history=conversation_history)
 
 if __name__ == '__main__':
     app.run(debug=True)
