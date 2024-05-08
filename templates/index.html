@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Chatbot</title>
+</head>
+<body>
+    
+    <h1>Chatbot</h1>
+    <form action="/chat" method="post">
+        <label for="message">Message: </label>
+        <input type="text" id="message" name="message" required><br><br>
+        <label for="temperature">Temperature: </label>
+        <input type="number" id="temperature" name="temperature" step="0.1" min="0.0" max="2.0"><br><br>
+        <label for="max_tokens">Max Tokens: </label>
+        <input type="number" id="max_tokens" name="max_tokens"><br><br>
+        <label for="tone">Select Tone: </label>
+        <select id="tone" name="tone">
+            <option value="casual">Casual</option>
+            <option value="formal">Formal</option>
+            <option value="friendly">Friendly</option>
+        </select>
+        <br><br>
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+    {% if bot_response %}
+    <h2>Bot Response: </h2>
+    <p>{{ bot_response }}</p>
+    {% endif%}
+
+</body>
+</html>
